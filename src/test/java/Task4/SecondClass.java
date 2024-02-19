@@ -1,5 +1,6 @@
 package Task4;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class SecondClass implements Runnable {
@@ -10,9 +11,24 @@ public class SecondClass implements Runnable {
     }
 
     @Override
-    public void run() {
-        for (int i = 0; i < 10000; i++) {
-            integerList.remove(i);
+    public  void run() {
+
+        synchronized (this){
+
+            Iterator<Integer> iterator = integerList.iterator();
+
+            while(iterator.hasNext()){
+                int digit = iterator.next();
+                synchronized (iterator){
+                    iterator.remove();
+                }
+            }
+
+            if(integerList.isEmpty()){
+                System.out.println("We removed all elements from list.");
+            }
+
         }
+
     }
 }

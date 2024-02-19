@@ -1,5 +1,7 @@
 package Task4;
 
+import thread123.MyRunnableClass;
+
 import java.util.List;
 
 public class FirstClass implements Runnable{
@@ -9,10 +11,21 @@ public class FirstClass implements Runnable{
         this.integerList = integerList;
     }
 
+
+
     @Override
     public void run() {
-        for (int i = 0; i < 10000; i++) {
-            integerList.add(i);
+        synchronized (this) {
+
+            for (int i = 0; i < 10000; i++) {
+                 integerList.add(i);
+            }
+
+            if(integerList.size() == 10000){
+                System.out.println("We add " + integerList.size());
+            }
+
         }
+
     }
 }
