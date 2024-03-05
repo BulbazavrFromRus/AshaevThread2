@@ -2,6 +2,7 @@ package Task4;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class SecondClass implements Runnable {
     private List<Integer> integerList;
@@ -13,16 +14,14 @@ public class SecondClass implements Runnable {
     @Override
     public  void run() {
 
-        synchronized (this){
+        synchronized (integerList){
 
-            Iterator<Integer> iterator = integerList.iterator();
+           for(int i = 0; i < 10000; i++){
+               Random r = new Random();
+               int index = r.nextInt(integerList.size());
+               integerList.remove(index);
+           }
 
-            while(iterator.hasNext()){
-                int digit = iterator.next();
-                synchronized (iterator){
-                    iterator.remove();
-                }
-            }
 
             if(integerList.isEmpty()){
                 System.out.println("We removed all elements from list.");

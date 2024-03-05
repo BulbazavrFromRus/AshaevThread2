@@ -15,9 +15,14 @@ public class Main {
 
         thread1.start();
 
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
 
         thread2.start();
+
+        thread1.join();
+        thread2.join();
+
+        System.out.println(integerList);
 
 
 

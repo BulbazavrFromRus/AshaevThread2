@@ -15,7 +15,7 @@ public class FirstClass implements Runnable{
 
     @Override
     public void run() {
-        synchronized (this) {
+        synchronized (integerList) {
 
             for (int i = 0; i < 10000; i++) {
                  integerList.add(i);
